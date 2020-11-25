@@ -1,20 +1,20 @@
-void print_singly_linked_list(SinglyLinkedListNode* node, string sep, ofstream& fout) {
-    while (node) {
-        fout << node->data;
-
-        node = node->next;
-
-        if (node) {
-            fout << sep;
+bool has_cycle(SinglyLinkedListNode* head) 
+{
+    if(head == NULL)
+    {
+        return 0;
+    }
+    SinglyLinkedListNode *slow=head, *fast= head;
+    
+    while (fast != NULL && fast->next != NULL)
+    {
+        slow = slow->next;
+        fast = fast->next->next;
+        
+        if(slow == fast)
+        {
+            return 1;
         }
     }
-}
-
-void free_singly_linked_list(SinglyLinkedListNode* node) {
-    while (node) {
-        SinglyLinkedListNode* temp = node;
-        node = node->next;
-
-        free(temp);
-    }
+    return 0;
 }
